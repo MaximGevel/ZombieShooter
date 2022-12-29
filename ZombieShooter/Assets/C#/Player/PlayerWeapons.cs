@@ -6,15 +6,77 @@ public class PlayerWeapons : MonoBehaviour
 {
     [SerializeField] AbstractWeaponData[] fullWeapons;//все оружия, которые могут быть у гг
     [SerializeField] List<AbstractWeaponData> playerWeapons = new List<AbstractWeaponData>();//оружия, которые есть у гг
+    [SerializeField] AbstractWeaponData activeWeapon;
 
     private void Start()
     {
-        playerWeapons[0].gameObject.SetActive(true);
+        ActivateWeapons();
     }
 
     private void Update()
     {
-        playerWeapons[0].
+        SwitchWeapon();
+
+        /*if (Input.GetMouseButtonDown(0))
+        {
+            if(activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon)
+            {
+                activeWeapon.Attack();
+            }
+        }*/
+
+        
+    }
+
+    void SwitchWeapon()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            foreach (var weapon in playerWeapons)
+            {
+                if(weapon.WeaponId == 0)
+                {
+                    activeWeapon = weapon;
+                }
+            }
+
+        }else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            foreach (var weapon in playerWeapons)
+            {
+                if (weapon.WeaponId == 1)
+                {
+                    activeWeapon = weapon;
+                }
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            foreach (var weapon in playerWeapons)
+            {
+                if (weapon.WeaponId == 2)
+                {
+                    activeWeapon = weapon;
+                }
+            }
+        }
+
+        ActivateWeapons();
+    }
+
+    void ActivateWeapons()
+    {
+        foreach (var weapon in playerWeapons)
+        {
+            if(activeWeapon.WeaponId == weapon.WeaponId)
+            {
+                activeWeapon.gameObject.SetActive(true);
+            }
+            else
+            {
+                weapon.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -32,7 +94,8 @@ public class PlayerWeapons : MonoBehaviour
                     if (weapon.WeaponId == weaponInPlayer.WeaponId)
                     {
                         playerWeapons.Add(weaponInPlayer);
-                        weaponInPlayer.gameObject.SetActive(true);
+                        activeWeapon = weaponInPlayer;
+                        ActivateWeapons();
 
                         Destroy(pickUpObj.gameObject);
                     }

@@ -10,21 +10,17 @@ public abstract class AbstractWeaponData : MonoBehaviour
         FireWeapon
     }
 
+    [SerializeField] Type weaponType;
+
     [Header("General")]
     [SerializeField] int id;//id оружия
     [SerializeField] int damage; //урон
     [SerializeField] float speedAttack;//скорострельность
-    [SerializeField] KeyCode keycodeForActivate;//кнопка для выбора оружия
 
     public int WeaponId => id;
     public int WeaponDamage => damage;
     public float WeaponSpeedAttack => speedAttack;
-    public KeyCode WeaponKeyCodeForActivate => keycodeForActivate;
-    public Type WeaponType
-    {
-        get { return WeaponType; }
-        set { WeaponType = value; }
-    }
+    public Type WeaponType => weaponType;
 
     public abstract void Attack();
 }

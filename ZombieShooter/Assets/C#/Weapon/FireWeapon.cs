@@ -7,63 +7,97 @@ public class FireWeapon : AbstractWeaponData
     Camera camera;
 
     [Header("Fire Weapon")]
-    [SerializeField] int amountButtonAtShoot;//колво пуль при стрельбе
     [SerializeField] int amountBulletInMagazine;//колво пуль в магазине
     [SerializeField] float reloadTime;//время перезaрядки
     [SerializeField] float bulletRangeScatter;//разброс пуль
 
+    float timer;
+    int currentAmountBullet;
+    bool isReload;
+
     public float WeaponReloadTime => reloadTime;
     public float WeaponBulletRangeScatter => bulletRangeScatter;
     public int WeaponAmountBulletInMagazine => amountBulletInMagazine;
-    public int WeaponAmountButtonsAtShoot => amountButtonAtShoot;
 
     private void Start()
     {
         if (camera == null)
             camera = GameObject.FindObjectOfType<Camera>();
+
+        if(currentAmountBullet <= 0)
+        {
+            currentAmountBullet = WeaponAmountBulletInMagazine;
+        }
+        
+        GameManager.UpdateBulletTxt(currentAmountBullet, WeaponAmountBulletInMagazine);
     }
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Shoot");
+        timer = WeaponSpeedAttack;
+
+        RaycastHit hit;
+        if (Physics.Raycast(camera.transform.position,
+            camera.transform.forward + (Random.insideUnitSphere * (WeaponBulletRangeScatter / 10)), out hit))
+        {
+            HealthManager healthManager = hit.collider.GetComponent<HealthManager>();
+            if (healthManager)
+            {
+                healthManager.TakeDamage(WeaponDamage);
+            }
+
+            currentAmountBullet--;
+
+            Debug.Log(hit.collider.name);
+            StartCoroutine(SphereIndicator(hit.point));
+        }
     }
 
-    /*public void WeaponShoot()
+    private void Update()
     {
-        for (int i = 0; i < weapon.WeaponAmountButtonsAtShoot; i++)
+        timer -= Time.deltaTime;
+
+        if (Input.GetMouseButton(0))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(camera.transform.position, 
-                camera.transform.forward + (Random.insideUnitSphere * (weapon.WeaponBulletRangeScatter / 10)), out hit))
+            if(currentAmountBullet > 0)
             {
-
-                HealthManager healthManager = hit.collider.GetComponent<HealthManager>();
-                if (healthManager)
+                if(!isReload && timer <= 0)
                 {
-                    healthManager.TakeDamage(weapon.WeaponDamage);
+                    Attack();
+                    GameManager.UpdateBulletTxt(currentAmountBullet, WeaponAmountBulletInMagazine);
                 }
-
-                Debug.Log(hit.collider.name);
-                StartCoroutine(SphereIndicator(hit.point));
             }
+            else
+            {
+                WeaponReload();
+            }
+            
         }
-    }*/
 
-    /*void WeaponReload()
+        if (Input.GetKeyDown(KeyCode.R) && !isReload)
+        {
+            WeaponReload();
+
+        }
+    }
+
+    void WeaponReload()
     {
-    isReload = true;
+        isReload = true;
 
-    StartCoroutine(IEWeaponReload(weapon.WeaponReloadTime));
-    }*/
+        StartCoroutine(IEWeaponReload(WeaponReloadTime));
+    }
 
-    /*IEnumerator IEWeaponReload(float timer)
+    IEnumerator IEWeaponReload(float timer)
     {
         while(timer > 0)
         {
             timer--;
             if(timer <= 0)
             {
-                currentAmountBulletInMagazine = weapon.WeaponAmountBulletInMagazine;
+                currentAmountBullet = WeaponAmountBulletInMagazine;
+                GameManager.UpdateBulletTxt(currentAmountBullet, WeaponAmountBulletInMagazine);
                 isReload = false;
 
                 break;
@@ -71,7 +105,7 @@ public class FireWeapon : AbstractWeaponData
 
             yield return new WaitForSeconds(1);
         }
-    }*/
+    }
 
     private IEnumerator SphereIndicator(Vector3 pos)
     {
