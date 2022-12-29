@@ -8,10 +8,12 @@ public class MeleeWeapon : AbstractWeaponData
     [SerializeField] Transform attackPoint;//точка удара
     [SerializeField] float attackRadius;//радиус удара
     [SerializeField] LayerMask layerItCanAttack;//слои, с которыми можно атакавать
+    Type type = Type.MeleeWeapon;
 
     public Transform FistPunchPoint => attackPoint;
     public float FistPunchRadius => attackRadius;
     public LayerMask FistLayerItCanHit => layerItCanAttack;
+    public Type WeaponType => type;
 
     public override void Attack()
     {

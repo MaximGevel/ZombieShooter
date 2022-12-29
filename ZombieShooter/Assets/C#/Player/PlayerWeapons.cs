@@ -9,12 +9,12 @@ public class PlayerWeapons : MonoBehaviour
 
     private void Start()
     {
-
+        playerWeapons[0].gameObject.SetActive(true);
     }
 
     private void Update()
     {
-
+        playerWeapons[0].
     }
 
     private void OnTriggerStay(Collider other)

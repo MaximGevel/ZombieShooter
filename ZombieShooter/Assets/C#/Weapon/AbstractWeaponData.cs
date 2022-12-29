@@ -4,6 +4,12 @@ using UnityEngine;
 
 public abstract class AbstractWeaponData : MonoBehaviour
 {
+    public enum Type
+    {
+        MeleeWeapon,
+        FireWeapon
+    }
+
     [Header("General")]
     [SerializeField] int id;//id оружия
     [SerializeField] int damage; //урон
@@ -13,8 +19,12 @@ public abstract class AbstractWeaponData : MonoBehaviour
     public int WeaponId => id;
     public int WeaponDamage => damage;
     public float WeaponSpeedAttack => speedAttack;
-
     public KeyCode WeaponKeyCodeForActivate => keycodeForActivate;
+    public Type WeaponType
+    {
+        get { return WeaponType; }
+        set { WeaponType = value; }
+    }
 
     public abstract void Attack();
 }
