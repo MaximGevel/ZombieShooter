@@ -7,6 +7,7 @@ public class PlayerWeapons : MonoBehaviour
     [SerializeField] AbstractWeaponData[] fullWeapons;//все оружия, которые могут быть у гг
     [SerializeField] List<AbstractWeaponData> playerWeapons = new List<AbstractWeaponData>();//оружия, которые есть у гг
     [SerializeField] AbstractWeaponData activeWeapon;
+    public AbstractWeaponData ActiveWeapon => activeWeapon;
 
     private void Start()
     {

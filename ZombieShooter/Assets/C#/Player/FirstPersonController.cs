@@ -16,7 +16,7 @@ using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
-    private Rigidbody rb;
+    
 
     #region Camera Movement Variables
 
@@ -27,6 +27,7 @@ public class FirstPersonController : MonoBehaviour
     public bool cameraCanMove = true;
     public float mouseSensitivity = 2f;
     public float maxLookAngle = 50f;
+    
 
     // Crosshair
     public bool lockCursor = true;
@@ -131,9 +132,15 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    PlayerWeapons playerWeapons;
+    private Rigidbody rb;
+    Animator animator;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        playerWeapons = GetComponent<PlayerWeapons>();
 
         crosshairObject = GetComponentInChildren<Image>();
 
@@ -378,10 +385,13 @@ public class FirstPersonController : MonoBehaviour
             if (targetVelocity.x != 0 || targetVelocity.z != 0 && isGrounded)
             {
                 isWalking = true;
+
             }
             else
             {
                 isWalking = false;
+                animator.SetBool("isWalk", false);
+                animator.SetInteger("Weapon", playerWeapons.ActiveWeapon.WeaponId);
             }
 
             // All movement calculations shile sprint is active
@@ -560,6 +570,7 @@ public class FirstPersonController : MonoBehaviour
         GUILayout.Label("Camera Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
         EditorGUILayout.Space();
 
+       
         fpc.playerCamera = (Camera)EditorGUILayout.ObjectField(new GUIContent("Camera", "Camera attached to the controller."), fpc.playerCamera, typeof(Camera), true);
         fpc.fov = EditorGUILayout.Slider(new GUIContent("Field of View", "The camera’s view angle. Changes the player camera directly."), fpc.fov, fpc.zoomFOV, 179f);
         fpc.cameraCanMove = EditorGUILayout.ToggleLeft(new GUIContent("Enable Camera Rotation", "Determines if the camera is allowed to move."), fpc.cameraCanMove);
