@@ -209,6 +209,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+        animator.SetInteger("Weapon", playerWeapons.ActiveWeapon.WeaponId);
+
         #region Camera
 
         // Control camera movement
@@ -390,8 +392,6 @@ public class FirstPersonController : MonoBehaviour
             else
             {
                 isWalking = false;
-                animator.SetBool("isWalk", false);
-                animator.SetInteger("Weapon", playerWeapons.ActiveWeapon.WeaponId);
             }
 
             // All movement calculations shile sprint is active

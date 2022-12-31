@@ -17,16 +17,6 @@ public class PlayerWeapons : MonoBehaviour
     private void Update()
     {
         SwitchWeapon();
-
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            if(activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon)
-            {
-                activeWeapon.Attack();
-            }
-        }*/
-
-        
     }
 
     void SwitchWeapon()
