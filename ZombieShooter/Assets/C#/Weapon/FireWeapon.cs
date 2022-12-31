@@ -54,7 +54,7 @@ public class FireWeapon : AbstractWeaponData
                     {
                         healthManager.TakeDamage(WeaponDamage);
                     }
-
+                    
                     currentAmountBullet--;
 
                     Debug.Log(hit.collider.name);

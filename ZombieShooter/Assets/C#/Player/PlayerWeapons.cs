@@ -29,7 +29,6 @@ public class PlayerWeapons : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             activeWeapon.Attack(animator);
-            animator.SetTrigger("Attack");
         }
 
         if (Input.GetKeyDown(KeyCode.R) && activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon)

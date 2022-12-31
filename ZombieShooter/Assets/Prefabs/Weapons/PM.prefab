@@ -111,7 +111,7 @@ MonoBehaviour:
   weaponType: 1
   id: 1
   damage: 1
-  speedAttack: 0.75
+  speedAttack: 0.6
   amountBulletInMagazine: 12
-  reloadTime: 1
+  reloadTime: 1.5
   bulletRangeScatter: 0.2
