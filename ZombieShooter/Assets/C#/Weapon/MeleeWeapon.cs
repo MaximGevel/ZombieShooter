@@ -13,9 +13,10 @@ public class MeleeWeapon : AbstractWeaponData
     public float FistPunchRadius => attackRadius;
     public LayerMask FistLayerItCanHit => layerItCanAttack;
 
-    public override void Attack()
+    public override void Attack(Animator animator)
     {
-        throw new System.NotImplementedException();
+        animator.SetTrigger("Attack");
+        Debug.Log("Punch");
     }
 
     /*public void Punch()

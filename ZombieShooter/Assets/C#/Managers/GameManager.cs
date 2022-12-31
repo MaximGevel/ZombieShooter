@@ -14,8 +14,28 @@ public class GameManager : MonoBehaviour
         gameManager = this;
     }
 
-    public static void UpdateBulletTxt(int amountBullet,int maxBullet)
+    public static void UpdateBulletTxt(AbstractWeaponData weapon)
     {
-        gameManager.bulletTxt.text = amountBullet + "/" + maxBullet;
+        if(weapon.WeaponType == AbstractWeaponData.Type.FireWeapon)
+        {
+            FireWeapon fWeapon = weapon.GetComponent<FireWeapon>();
+            if (!fWeapon.WeaponIsReload)
+            {
+                int amountBullet = fWeapon.WeaponCurrentAmountBullet;
+                int maxBullet = fWeapon.WeaponAmountBulletInMagazine;
+
+                gameManager.bulletTxt.text = amountBullet + "/" + maxBullet;
+            }
+            else
+            {
+                gameManager.bulletTxt.text = "reload...";
+            }
+
+            
+        }else
+        {
+            gameManager.bulletTxt.text = "";
+        }
+        
     }
 }

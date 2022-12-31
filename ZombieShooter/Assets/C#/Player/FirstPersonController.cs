@@ -209,12 +209,10 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
-        animator.SetInteger("Weapon", playerWeapons.ActiveWeapon.WeaponId);
-
         #region Camera
 
         // Control camera movement
-        if(cameraCanMove)
+        if (cameraCanMove)
         {
             yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
 
@@ -387,11 +385,12 @@ public class FirstPersonController : MonoBehaviour
             if (targetVelocity.x != 0 || targetVelocity.z != 0 && isGrounded)
             {
                 isWalking = true;
-
+                animator.SetBool("isWalk", true);
             }
             else
             {
                 isWalking = false;
+                animator.SetBool("isWalk", false);
             }
 
             // All movement calculations shile sprint is active

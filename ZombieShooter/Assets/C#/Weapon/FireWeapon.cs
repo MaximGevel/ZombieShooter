@@ -18,6 +18,8 @@ public class FireWeapon : AbstractWeaponData
     public float WeaponReloadTime => reloadTime;
     public float WeaponBulletRangeScatter => bulletRangeScatter;
     public int WeaponAmountBulletInMagazine => amountBulletInMagazine;
+    public int WeaponCurrentAmountBullet => currentAmountBullet;
+    public bool WeaponIsReload => isReload;
 
     private void Start()
     {
@@ -29,64 +31,58 @@ public class FireWeapon : AbstractWeaponData
             currentAmountBullet = WeaponAmountBulletInMagazine;
         }
         
-        GameManager.UpdateBulletTxt(currentAmountBullet, WeaponAmountBulletInMagazine);
+        GameManager.UpdateBulletTxt(this);
+        timer = 0;
     }
 
-    public override void Attack()
+    public override void Attack(Animator animator)
     {
-        Debug.Log("Shoot");
-        timer = WeaponSpeedAttack;
-
-        RaycastHit hit;
-        if (Physics.Raycast(camera.transform.position,
-            camera.transform.forward + (Random.insideUnitSphere * (WeaponBulletRangeScatter / 10)), out hit))
+        if (currentAmountBullet > 0)
         {
-            HealthManager healthManager = hit.collider.GetComponent<HealthManager>();
-            if (healthManager)
+            if (!isReload && timer <= 0)
             {
-                healthManager.TakeDamage(WeaponDamage);
+                Debug.Log("Shoot");
+                timer = WeaponSpeedAttack;
+                animator.SetTrigger("Attack");
+
+                RaycastHit hit;
+                if (Physics.Raycast(camera.transform.position,
+                    camera.transform.forward + (Random.insideUnitSphere * (WeaponBulletRangeScatter / 10)), out hit))
+                {
+                    HealthManager healthManager = hit.collider.GetComponent<HealthManager>();
+                    if (healthManager)
+                    {
+                        healthManager.TakeDamage(WeaponDamage);
+                    }
+
+                    currentAmountBullet--;
+
+                    Debug.Log(hit.collider.name);
+                    StartCoroutine(SphereIndicator(hit.point));
+                }
+
+                GameManager.UpdateBulletTxt(this);
             }
-
-            currentAmountBullet--;
-
-            Debug.Log(hit.collider.name);
-            StartCoroutine(SphereIndicator(hit.point));
+        }
+        else
+        {
+            WeaponReload();
         }
     }
 
     private void Update()
     {
         timer -= Time.deltaTime;
-
-        if (Input.GetMouseButton(0))
-        {
-            if(currentAmountBullet > 0)
-            {
-                if(!isReload && timer <= 0)
-                {
-                    Attack();
-                    GameManager.UpdateBulletTxt(currentAmountBullet, WeaponAmountBulletInMagazine);
-                }
-            }
-            else
-            {
-                WeaponReload();
-            }
-            
-        }
-
-        if (Input.GetKeyDown(KeyCode.R) && !isReload)
-        {
-            WeaponReload();
-
-        }
     }
 
-    void WeaponReload()
+    public void WeaponReload()
     {
-        isReload = true;
-
-        StartCoroutine(IEWeaponReload(WeaponReloadTime));
+        if (!isReload)
+        {
+            isReload = true;
+            GameManager.UpdateBulletTxt(this);
+            StartCoroutine(IEWeaponReload(WeaponReloadTime));
+        }
     }
 
     IEnumerator IEWeaponReload(float timer)
@@ -97,7 +93,7 @@ public class FireWeapon : AbstractWeaponData
             if(timer <= 0)
             {
                 currentAmountBullet = WeaponAmountBulletInMagazine;
-                GameManager.UpdateBulletTxt(currentAmountBullet, WeaponAmountBulletInMagazine);
+                GameManager.UpdateBulletTxt(this);
                 isReload = false;
 
                 break;

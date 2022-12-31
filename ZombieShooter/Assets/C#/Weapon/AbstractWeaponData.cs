@@ -22,5 +22,5 @@ public abstract class AbstractWeaponData : MonoBehaviour
     public float WeaponSpeedAttack => speedAttack;
     public Type WeaponType => weaponType;
 
-    public abstract void Attack();
+    public abstract void Attack(Animator animator);
 }

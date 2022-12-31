@@ -9,14 +9,33 @@ public class PlayerWeapons : MonoBehaviour
     [SerializeField] AbstractWeaponData activeWeapon;
     public AbstractWeaponData ActiveWeapon => activeWeapon;
 
+    Animator animator;
+
     private void Start()
     {
+        if(animator == null)
+        {
+             animator = GetComponent<Animator>();
+        }
+
         ActivateWeapons();
+
     }
 
     private void Update()
     {
         SwitchWeapon();
+
+        if (Input.GetMouseButton(0))
+        {
+            activeWeapon.Attack(animator);
+            animator.SetTrigger("Attack");
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon)
+        {
+            activeWeapon.GetComponent<FireWeapon>().WeaponReload();
+        }
     }
 
     void SwitchWeapon()
@@ -53,6 +72,7 @@ public class PlayerWeapons : MonoBehaviour
         }
 
         ActivateWeapons();
+        
     }
 
     void ActivateWeapons()
@@ -62,12 +82,17 @@ public class PlayerWeapons : MonoBehaviour
             if(activeWeapon.WeaponId == weapon.WeaponId)
             {
                 activeWeapon.gameObject.SetActive(true);
+                animator.SetInteger("Weapon", activeWeapon.WeaponId);
+                GameManager.UpdateBulletTxt(activeWeapon);
+
             }
             else
             {
                 weapon.gameObject.SetActive(false);
             }
         }
+
+        
     }
 
     private void OnTriggerStay(Collider other)
