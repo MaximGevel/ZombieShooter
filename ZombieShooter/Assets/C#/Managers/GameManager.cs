@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             if (!fWeapon.WeaponIsReload)
             {
                 int amountBullet = fWeapon.WeaponCurrentAmountBullet;
-                int maxBullet = fWeapon.WeaponAmountBulletInMagazine;
+                int maxBullet = fWeapon.WeaponSpareBullet;
 
                 gameManager.bulletTxt.text = amountBullet + "/" + maxBullet;
             }

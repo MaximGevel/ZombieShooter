@@ -11,15 +11,24 @@ public class FireWeapon : AbstractWeaponData
     [SerializeField] float reloadTime;//время перезaрядки
     [SerializeField] float bulletRangeScatter;//разброс пуль
 
+    [Header("Effects")]
+    [SerializeField] GameObject hitEffect;
+
     float timer;
     int currentAmountBullet;
     bool isReload;
+    int spareBullet = 0;
 
     public float WeaponReloadTime => reloadTime;
     public float WeaponBulletRangeScatter => bulletRangeScatter;
     public int WeaponAmountBulletInMagazine => amountBulletInMagazine;
     public int WeaponCurrentAmountBullet => currentAmountBullet;
     public bool WeaponIsReload => isReload;
+    public int WeaponSpareBullet
+    {
+        get { return spareBullet; }
+        set { spareBullet = value; }
+    }
 
     private void Start()
     {
@@ -57,8 +66,7 @@ public class FireWeapon : AbstractWeaponData
                     
                     currentAmountBullet--;
 
-                    Debug.Log(hit.collider.name);
-                    StartCoroutine(SphereIndicator(hit.point));
+                    Instantiate(hitEffect, hit.point, Quaternion.identity);
                 }
 
                 GameManager.UpdateBulletTxt(this);
@@ -92,7 +100,16 @@ public class FireWeapon : AbstractWeaponData
             timer--;
             if(timer <= 0)
             {
-                currentAmountBullet = WeaponAmountBulletInMagazine;
+                if(spareBullet >= WeaponAmountBulletInMagazine)
+                {
+                    spareBullet -= WeaponAmountBulletInMagazine;
+                    currentAmountBullet = WeaponAmountBulletInMagazine;
+                }else
+                {
+                    currentAmountBullet = spareBullet;
+                    spareBullet -= spareBullet;
+                }
+               
                 GameManager.UpdateBulletTxt(this);
                 isReload = false;
 

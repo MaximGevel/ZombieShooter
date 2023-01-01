@@ -6,7 +6,7 @@ public class PlayerWeapons : MonoBehaviour
 {
     [SerializeField] AbstractWeaponData[] fullWeapons;//все оружия, которые могут быть у гг
     [SerializeField] List<AbstractWeaponData> playerWeapons = new List<AbstractWeaponData>();//оружия, которые есть у гг
-    [SerializeField] AbstractWeaponData activeWeapon;
+    [SerializeField] AbstractWeaponData activeWeapon;//активное оружие
     public AbstractWeaponData ActiveWeapon => activeWeapon;
 
     Animator animator;
@@ -116,9 +116,23 @@ public class PlayerWeapons : MonoBehaviour
                     }
 
                 }
+            }  
+        }
+
+        BulletBox bulletBox = other.GetComponent<BulletBox>();
+        if (bulletBox && activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon)
+        {
+            FireWeapon weapon = activeWeapon.GetComponent<FireWeapon>();
+            if(bulletBox.Weapon.WeaponId == weapon.WeaponId)
+            {
+                weapon.WeaponSpareBullet += bulletBox.AmountBullet;
+                GameManager.UpdateBulletTxt(weapon);
+
+                Destroy(bulletBox.gameObject);
+
+
             }
         }
-        
     }
 }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6654720416586321841}
   - component: {fileID: 5448165140406043401}
   - component: {fileID: 5141611615460093531}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pickupAK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5141611615460093540}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 1, z: 1}
+  m_LocalScale: {x: 0.60000026, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,7 +94,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.10744849, y: 1.342798, z: 0.34083238}
+  m_Size: {x: 0.98, y: 1.342798, z: 0.34083238}
   m_Center: {x: 0.00017524889, y: 0.050203975, z: -0.09536951}
 --- !u!114 &5141611615460093531
 MonoBehaviour:

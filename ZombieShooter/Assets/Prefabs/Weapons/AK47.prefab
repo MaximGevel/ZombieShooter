@@ -115,3 +115,4 @@ MonoBehaviour:
   amountBulletInMagazine: 25
   reloadTime: 2
   bulletRangeScatter: 0.15
+  hitEffect: {fileID: 8261415792930946662, guid: 3d9061cb9b25549409c8c6ace603b24b, type: 3}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2591099770104264471}
   - component: {fileID: 3761906615439683829}
   - component: {fileID: 4104349307439060685}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pickupPM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.32461303, y: 0.05388279, z: 0.18941635}
+  m_Size: {x: 0.32461303, y: 0.29, z: 0.18941635}
   m_Center: {x: -0.00026955456, y: -0.0000000018626451, z: -0.034056246}
 --- !u!114 &4104349307439060685
 MonoBehaviour:
