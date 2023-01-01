@@ -50,7 +50,6 @@ public class FireWeapon : AbstractWeaponData
         {
             if (!isReload && timer <= 0)
             {
-                Debug.Log("Shoot");
                 timer = WeaponSpeedAttack;
                 animator.SetTrigger("Attack");
 
@@ -85,7 +84,7 @@ public class FireWeapon : AbstractWeaponData
 
     public void WeaponReload()
     {
-        if (!isReload)
+        if (!isReload && spareBullet > 0 &&  currentAmountBullet < WeaponAmountBulletInMagazine)
         {
             isReload = true;
             GameManager.UpdateBulletTxt(this);
@@ -100,11 +99,17 @@ public class FireWeapon : AbstractWeaponData
             timer--;
             if(timer <= 0)
             {
-                if(spareBullet >= WeaponAmountBulletInMagazine)
+                int amountBullet = 0;
+
+
+                amountBullet = WeaponAmountBulletInMagazine - currentAmountBullet;
+
+                if(spareBullet >= amountBullet)
                 {
-                    spareBullet -= WeaponAmountBulletInMagazine;
-                    currentAmountBullet = WeaponAmountBulletInMagazine;
-                }else
+                    spareBullet -= amountBullet;
+                    currentAmountBullet += amountBullet;
+
+                }else if(spareBullet > 0 && spareBullet < amountBullet)
                 {
                     currentAmountBullet = spareBullet;
                     spareBullet -= spareBullet;

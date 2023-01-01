@@ -31,7 +31,7 @@ public class PlayerWeapons : MonoBehaviour
             activeWeapon.Attack(animator);
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon)
+        if (Input.GetKeyDown(KeyCode.R) && activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon )
         {
             activeWeapon.GetComponent<FireWeapon>().WeaponReload();
         }
@@ -118,19 +118,19 @@ public class PlayerWeapons : MonoBehaviour
                 }
             }  
         }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
         BulletBox bulletBox = other.GetComponent<BulletBox>();
         if (bulletBox && activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon)
         {
             FireWeapon weapon = activeWeapon.GetComponent<FireWeapon>();
-            if(bulletBox.Weapon.WeaponId == weapon.WeaponId)
+            if (bulletBox.Weapon.WeaponId == weapon.WeaponId)
             {
                 weapon.WeaponSpareBullet += bulletBox.AmountBullet;
                 GameManager.UpdateBulletTxt(weapon);
-
                 Destroy(bulletBox.gameObject);
-
-
             }
         }
     }
