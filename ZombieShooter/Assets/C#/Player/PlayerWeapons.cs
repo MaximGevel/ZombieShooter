@@ -94,6 +94,14 @@ public class PlayerWeapons : MonoBehaviour
         
     }
 
+    public void PunchAttack()
+    {
+        if(activeWeapon.WeaponType == AbstractWeaponData.Type.MeleeWeapon)
+        {
+            activeWeapon.GetComponent<MeleeWeapon>().Punch();
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         PickUpObjects pickUpObj = other.GetComponent<PickUpObjects>();

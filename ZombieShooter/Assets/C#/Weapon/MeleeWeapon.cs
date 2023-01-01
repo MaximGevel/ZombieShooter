@@ -9,29 +9,40 @@ public class MeleeWeapon : AbstractWeaponData
     [SerializeField] float attackRadius;//радиус удара
     [SerializeField] LayerMask layerItCanAttack;//слои, с которыми можно атакавать
 
+    float timer = 0;
+
     public Transform FistPunchPoint => attackPoint;
     public float FistPunchRadius => attackRadius;
     public LayerMask FistLayerItCanHit => layerItCanAttack;
 
     public override void Attack(Animator animator)
     {
-        animator.SetTrigger("Attack");
-        Debug.Log("Punch");
+        if(timer <= 0)
+        {
+            timer = WeaponSpeedAttack;
+            animator.SetTrigger("Attack");
+        }
+
     }
 
-    /*public void Punch()
-{
-    Collider[] hitObjects = Physics.OverlapSphere(fist.FistPunchPoint.position, fist.FistPunchRadius, fist.FistLayerItCanHit);
-    if (hitObjects.Length != 0)
+    private void Update()
     {
-        foreach (var obj in hitObjects)
+        timer -= Time.deltaTime;
+    }
+
+    public void Punch()
+    {
+        Collider[] hitObjects = Physics.OverlapSphere(attackPoint.position, attackRadius, layerItCanAttack);
+        if (hitObjects.Length != 0)
         {
-            HealthManager objHP = obj.GetComponent<HealthManager>();
-            if (objHP)
+            foreach (var obj in hitObjects)
             {
-                objHP.TakeDamage(fist.FistDamage);
+                HealthManager objHP = obj.GetComponent<HealthManager>();
+                if (objHP)
+                {
+                    objHP.TakeDamage(WeaponDamage);
+                }
             }
         }
     }
-}*/
 }
