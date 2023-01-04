@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d2bbafa070a0641921e7923a3bfb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 0}
+  weapon: {fileID: 1696223456998234854, guid: 06fb6ca24df127e4bbfbda2a49469286, type: 3}
   amountBulletInBox: 25
 --- !u!1 &4539043611483993844
 GameObject:

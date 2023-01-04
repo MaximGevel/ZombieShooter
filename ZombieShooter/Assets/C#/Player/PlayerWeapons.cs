@@ -102,15 +102,15 @@ public class PlayerWeapons : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         PickUpObjects pickUpObj = other.GetComponent<PickUpObjects>();
-        
+
         if (pickUpObj)
         {
             AbstractWeaponData weapon = pickUpObj.PickUpObject.GetComponent<AbstractWeaponData>();
 
-            if (weapon && Input.GetKeyDown(KeyCode.F))
+            if (weapon)
             {
                 foreach (var weaponInPlayer in fullWeapons)
                 {
@@ -124,12 +124,9 @@ public class PlayerWeapons : MonoBehaviour
                     }
 
                 }
-            }  
+            }
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
         BulletBox bulletBox = other.GetComponent<BulletBox>();
         if (bulletBox && activeWeapon.WeaponType == AbstractWeaponData.Type.FireWeapon)
         {
