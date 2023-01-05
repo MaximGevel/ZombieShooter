@@ -80,14 +80,14 @@ public class PlayerWeapons : MonoBehaviour
         {
             if(activeWeapon.WeaponId == weapon.WeaponId)
             {
-                activeWeapon.gameObject.SetActive(true);
+                //activeWeapon.gameObject.SetActive(true);
                 animator.SetInteger("Weapon", activeWeapon.WeaponId);
                 GameManager.UpdateBulletTxt(activeWeapon);
 
             }
             else
             {
-                weapon.gameObject.SetActive(false);
+                //weapon.gameObject.SetActive(false);
             }
         }
 

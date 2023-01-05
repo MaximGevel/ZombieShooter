@@ -13,6 +13,7 @@ public class FireWeapon : AbstractWeaponData
 
     [Header("Effects")]
     [SerializeField] GameObject hitEffect;
+    [SerializeField] ParticleSystem shootEf;
 
     float timer;
     int currentAmountBullet;
@@ -52,6 +53,7 @@ public class FireWeapon : AbstractWeaponData
             {
                 timer = WeaponSpeedAttack;
                 animator.SetTrigger("Attack");
+                shootEf.Play();
 
                 RaycastHit hit;
                 if (Physics.Raycast(camera.transform.position,
