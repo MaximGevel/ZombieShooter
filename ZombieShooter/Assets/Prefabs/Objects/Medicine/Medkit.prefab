@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7786528206664906566}
   - component: {fileID: 6602441651532937443}
   - component: {fileID: 8954390787212037161}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: medkit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7747870704423102805}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 7747870704975466303}
   - component: {fileID: 7747870704975466289}
   - component: {fileID: 7747870704975466302}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Medkit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -607,6 +607,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3964909018454099242}
     m_Modifications:
+    - target: {fileID: 1792531423485981258, guid: fc4f6188d9962a64b99a1557da6840bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544064863268023581, guid: fc4f6188d9962a64b99a1557da6840bd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544064863268023581, guid: fc4f6188d9962a64b99a1557da6840bd, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544064863268023581, guid: fc4f6188d9962a64b99a1557da6840bd, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544064863268023581, guid: fc4f6188d9962a64b99a1557da6840bd, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5435129427052401686, guid: fc4f6188d9962a64b99a1557da6840bd, type: 3}
       propertyPath: m_Name
       value: Hit A (Red)(shoot)

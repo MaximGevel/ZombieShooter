@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5457380517728684960}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5457380518647537068}
   - component: {fileID: 5457380518647537070}
   - component: {fileID: 5457380518647537069}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 7338231230922782121}
   - component: {fileID: 5942915295807765004}
   - component: {fileID: 8475086962138255046}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pills
   m_TagString: Untagged
   m_Icon: {fileID: 0}

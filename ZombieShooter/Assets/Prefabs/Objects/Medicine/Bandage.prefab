@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7062169542742836601}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7062169543224041439}
   - component: {fileID: 7062169543224041437}
   - component: {fileID: 7062169543224041438}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bandage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 7317052748553038335}
   - component: {fileID: 5919065956013024858}
   - component: {fileID: 8484861316800139920}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bandage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
